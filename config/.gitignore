@@ -1,0 +1,22 @@
+# skip .env files
+*.env
+# skip config files that may contain sensitive information
+config/*.yml
+# skip logs and temporary files
+logs/
+temp/
+# skip compiled files and caches
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.so
+*.egg-info/
+# skip virtual environments
+venv/
+env/
+# skip IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
