@@ -1,0 +1,15 @@
+# Example Configuration - Minimal Settings
+# Copy this to config.yml and customize as needed
+
+aws:
+  region: us-east-1
+
+export:
+  include_empty_apps: true
+  formats:
+    csv: true
+    json: true
+
+logging:
+  level: INFO
+  verbose: true
