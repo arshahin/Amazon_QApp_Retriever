@@ -1,0 +1,103 @@
+# Q Business & Q Apps Information Retrieval Configuration
+# This file contains runtime configuration for the retrieval tool
+
+# AWS Configuration
+aws:
+  # AWS Region where Q Business applications are deployed
+  region: us-east-1
+  
+  # Optional: Specific AWS profile to use (from ~/.aws/credentials)
+  # If not specified, will use credentials from .env file or default profile
+  profile: null
+  
+  # Optional: Expected AWS account ID (for verification)
+  # If specified, tool will warn if connected to a different account
+  expected_account_id: null
+
+# Export Configuration
+export:
+  # Include Q Business applications with no Q Apps in the export
+  include_empty_apps: true
+  
+  # Export format options
+  formats:
+    csv: true
+    json: true
+  
+  # CSV Configuration
+  csv:
+    # Include header row
+    include_headers: true
+    
+    # Encoding for CSV file
+    encoding: utf-8
+  
+  # Filename pattern (timestamp will be added automatically)
+  # Available variables: {date}, {time}, {datetime}, {region}, {account}
+  filename_pattern: "qapps_export_{datetime}"
+
+# Retrieval Configuration
+retrieval:
+  # Maximum number of applications to retrieve per API call
+  max_applications_per_page: 50
+  
+  # Maximum number of Q Apps to retrieve per application per API call
+  max_qapps_per_page: 100
+  
+  # Retry configuration for API calls
+  retry:
+    max_attempts: 3
+    backoff_factor: 2
+
+# Output Configuration
+output:
+  # Column order and inclusion
+  # Set to false to exclude a column from the export
+  columns:
+    # Primary columns (recommended to keep enabled)
+    qapp_name: true
+    user_count: true
+    owner_created_by: true
+    
+    # Q Business application columns
+    qbusiness_app_name: true
+    qbusiness_app_id: true
+    qbusiness_status: true
+    qbusiness_identity_type: true
+    qbusiness_created_at: true
+    qbusiness_updated_at: true
+    qbusiness_encryption: true
+    
+    # Q App details
+    qapp_library_item_id: true
+    qapp_id: true
+    qapp_version: true
+    qapp_status: true
+    created_at: true
+    updated_by: true
+    updated_at: true
+    
+    # Usage and ratings
+    rating_count: true
+    is_verified: true
+    is_rated_by_user: true
+    
+    # Additional information
+    description: true
+    categories: true
+    
+    # Metadata
+    retrieval_timestamp: true
+    aws_region: true
+    aws_account: true
+
+# Logging Configuration
+logging:
+  # Log level: DEBUG, INFO, WARNING, ERROR, CRITICAL
+  level: INFO
+  
+  # Show detailed progress information
+  verbose: true
+  
+  # Show warnings for missing permissions
+  show_permission_warnings: true
