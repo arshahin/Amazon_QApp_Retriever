@@ -293,15 +293,49 @@ class QBusinessInfoRetriever:
     
     def _create_data_row(self, app, qapp=None):
         """Create a data row from application and Q App data"""
+        
+        # Extract attachments configuration
+        attachments_config = app.get('attachmentsConfiguration', {})
+        
+        # Extract auto-subscription configuration
+        auto_sub_config = app.get('autoSubscriptionConfiguration', {})
+        
+        # Extract personalization configuration
+        personalization = app.get('personalizationConfiguration', {})
+        
+        # Extract Q Apps configuration
+        qapps_config = app.get('qAppsConfiguration', {})
+        
         row = {
-            # Q Business Application Info
+            # Q Business Application Info - Basic
             'qbusiness_app_name': app.get('displayName', app.get('applicationId', 'N/A')),
             'qbusiness_app_id': app.get('applicationId', 'N/A'),
+            'qbusiness_app_arn': app.get('applicationArn', 'N/A'),
             'qbusiness_status': app.get('status', 'N/A'),
             'qbusiness_identity_type': app.get('identityType', 'N/A'),
+            'qbusiness_identity_center_arn': app.get('identityCenterApplicationArn', 'N/A'),
             'qbusiness_created_at': str(app.get('createdAt', 'N/A')),
             'qbusiness_updated_at': str(app.get('updatedAt', 'N/A')),
             'qbusiness_encryption': app.get('encryptionConfiguration', {}).get('kmsKeyId', 'AWS Managed'),
+            
+            # Q Business Configuration - Attachments
+            'attachments_status': attachments_config.get('attachmentsControlMode', 'N/A'),
+            
+            # Q Business Configuration - Auto Subscription
+            'auto_subscription_status': auto_sub_config.get('autoSubscribe', 'N/A'),
+            'auto_subscription_default_response': auto_sub_config.get('defaultSubscriptionType', 'N/A'),
+            
+            # Q Business Configuration - Personalization
+            'personalization_status': personalization.get('personalizationControlMode', 'N/A'),
+            
+            # Q Business Configuration - Q Apps
+            'qapps_enabled': qapps_config.get('qAppsControlMode', 'N/A'),
+            
+            # Q Business Configuration - Role ARN
+            'role_arn': app.get('roleArn', 'N/A'),
+            
+            # Q Business Configuration - Error
+            'error_message': app.get('error', {}).get('errorMessage', 'N/A') if 'error' in app else 'N/A',
         }
         
         if qapp:

@@ -1,0 +1,30 @@
+# Ignore credentials and sensitive data
+config/.env
+
+# Ignore customized configuration (keep example)
+input/config.yml
+
+# Ignore output files
+output/*.csv
+output/*.json
+
+# Ignore Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Ignore virtual environment
+venv/
+env/
+
+# Ignore IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Keep directory structure and examples
+!output/.gitkeep
+!input/.gitkeep
+!input/config.example.yml
